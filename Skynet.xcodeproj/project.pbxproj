@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3DF09F28A3CE080024CA72 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF09E28A3CE080024CA72 /* User.swift */; };
+		0B3DF0A228A3D0200024CA72 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF0A128A3D0200024CA72 /* UserViewModel.swift */; };
+		0B3DF0A528A3E8840024CA72 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF0A428A3E8840024CA72 /* API.swift */; };
 		954A194128A29FFE004C97D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A194028A29FFE004C97D9 /* AppDelegate.swift */; };
 		954A194328A29FFE004C97D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A194228A29FFE004C97D9 /* SceneDelegate.swift */; };
 		954A194528A29FFE004C97D9 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A194428A29FFE004C97D9 /* MainController.swift */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B3DF09E28A3CE080024CA72 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0B3DF0A128A3D0200024CA72 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		0B3DF0A428A3E8840024CA72 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		954A193D28A29FFE004C97D9 /* Skynet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skynet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		954A194028A29FFE004C97D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		954A194228A29FFE004C97D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +80,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B3DF09D28A3CDF30024CA72 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B3DF09E28A3CE080024CA72 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B3DF0A028A3CFF90024CA72 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0B3DF0A128A3D0200024CA72 /* UserViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0B3DF0A328A3E8750024CA72 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0B3DF0A428A3E8840024CA72 /* API.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0B3DF0A928A3ED3A0024CA72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				954A194428A29FFE004C97D9 /* MainController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		954A193428A29FFE004C97D9 = {
 			isa = PBXGroup;
 			children = (
@@ -97,9 +135,12 @@
 		954A193F28A29FFE004C97D9 /* Skynet */ = {
 			isa = PBXGroup;
 			children = (
+				0B3DF0A928A3ED3A0024CA72 /* View */,
+				0B3DF0A328A3E8750024CA72 /* Service */,
+				0B3DF0A028A3CFF90024CA72 /* ViewModel */,
+				0B3DF09D28A3CDF30024CA72 /* Model */,
 				954A194028A29FFE004C97D9 /* AppDelegate.swift */,
 				954A194228A29FFE004C97D9 /* SceneDelegate.swift */,
-				954A194428A29FFE004C97D9 /* MainController.swift */,
 				954A194928A29FFF004C97D9 /* Assets.xcassets */,
 				954A194B28A29FFF004C97D9 /* LaunchScreen.storyboard */,
 				954A194E28A29FFF004C97D9 /* Info.plist */,
@@ -254,8 +295,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B3DF09F28A3CE080024CA72 /* User.swift in Sources */,
 				954A194528A29FFE004C97D9 /* MainController.swift in Sources */,
 				954A194128A29FFE004C97D9 /* AppDelegate.swift in Sources */,
+				0B3DF0A228A3D0200024CA72 /* UserViewModel.swift in Sources */,
+				0B3DF0A528A3E8840024CA72 /* API.swift in Sources */,
 				954A194328A29FFE004C97D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,12 +476,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Academy.Skynet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lais.Skynet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -459,12 +504,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Academy.Skynet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lais.Skynet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
