@@ -6,3 +6,12 @@
 //
 
 import Foundation
+@testable import Skynet
+
+
+class MockServices: API {
+    static func getUsers(){
+        print("oi")
+    }
+
+}
