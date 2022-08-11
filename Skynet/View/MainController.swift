@@ -32,7 +32,6 @@ class MainController: UIViewController {
         super.viewDidLoad()
         view.addSubview(button)
         view.addSubview(buttonPost)
-        
         NSLayoutConstraint.activate([
 
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
