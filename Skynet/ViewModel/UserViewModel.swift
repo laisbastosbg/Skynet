@@ -25,4 +25,12 @@ class UserViewModel: ObservableObject {
         }
     }
     
+    func login(user: User.authentication) async {
+        do {
+            let responseData = try await API.authenticateUser(user: user)
+            print(responseData)
+        } catch {
+            print("Algo deu errado: \(error)" )
+        }
+    }
 }

@@ -35,4 +35,25 @@ class API {
         
         return user
     }
+    
+    static func authenticateUser(user: User.authentication) async throws -> User.withToken {
+        let loginString = "\(user.username):\(user.password)"
+        
+        guard let loginData = loginString.data(using:String.Encoding.utf8) else {
+            fatalError("Nome de usuario ou senha invalidos")
+        }
+        
+        let base64LoginString = loginData.base64EncodedString()
+        var urlRequest = URLRequest(url: URL(string: "http://localhost:8080/users/login")!)
+        
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+
+        urlRequest.httpBody = try JSONEncoder().encode(user)
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        let user = try JSONDecoder().decode(User.withToken.self, from: data)
+        
+        return user
+    }
 }

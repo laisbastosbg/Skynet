@@ -63,6 +63,26 @@ class ApiTests: XCTestCase {
         XCTAssertEqual(expected, output)
     }
     
+    func testAuthenticateUser() async throws {
+        let url = URL(string: "http://localhost:8080/users/login")!
+    
+        let mockedUser = User.authentication(username: "mafalda@gmail.com", password: "senhadamafalda")
+        
+        let mockedUserResponse = User(id: "asdaksdj", name: "Mafalda", email: "mafalda@gmail.com", password: "senhadamafalda")
+        let mockedCreatedUserResponse = User.withToken(token: "alsfhaofo", user: mockedUserResponse)
+        
+        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [
+            .post: try! JSONEncoder().encode(mockedCreatedUserResponse)
+        ])
+        
+        mock.register()
+        
+        let expected = mockedCreatedUserResponse
+        let output = try! await API.authenticateUser(user: mockedUser)
+        
+        XCTAssertEqual(expected, output)
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

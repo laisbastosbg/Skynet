@@ -27,11 +27,21 @@ class MainController: UIViewController {
         button.addTarget(self, action: #selector(self.createUser(sender:)), for: .touchUpInside)
         return button
     }()
+    
+    lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("login", for: .normal)
+
+        button.addTarget(self, action: #selector(self.login(sender:)), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(button)
         view.addSubview(buttonPost)
+        view.addSubview(loginButton)
         NSLayoutConstraint.activate([
 
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -39,7 +49,10 @@ class MainController: UIViewController {
 
 
             buttonPost.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonPost.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 10)
+            buttonPost.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 10),
+            
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 22)
         ])
         // Do any additional setup after loading the view.
     }
@@ -55,6 +68,13 @@ class MainController: UIViewController {
         Task {
             let user = User(id: nil, name: "Monica", email: "monica@gmail.com", password: "sansao")
             await userViewModel.addUser(user: user)
+        }
+    }
+    
+    @objc func login(sender: UIButton) {
+        Task {
+            let user = User.authentication(username: "monica@gmail.com", password: "sansao")
+            await userViewModel.login(user: user)
         }
     }
 
