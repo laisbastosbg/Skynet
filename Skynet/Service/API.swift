@@ -56,4 +56,23 @@ class API {
         
         return user
     }
+    
+    static func logout(token: String) async throws -> Int {
+        
+        var urlRequest = URLRequest(url: URL(string: "http://localhost:8080/users/logout")!)
+        
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        let user = try JSONDecoder().decode(User.withToken.self, from: data)
+        print(user)
+        
+        if let responseHeader = response as? HTTPURLResponse {
+            return responseHeader.statusCode
+        }
+        
+        return 500
+    }
 }

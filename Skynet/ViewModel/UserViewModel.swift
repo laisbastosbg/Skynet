@@ -43,4 +43,13 @@ class UserViewModel: ObservableObject {
             print("Algo deu errado: \(error)" )
         }
     }
+    
+    func logout(token: String) async {
+        do {
+            let responseData = try await API.logout(token: token)
+            print(responseData)
+        } catch {
+            print("Algo deu errado no logout: \(error)" )
+        }
+    }
 }
