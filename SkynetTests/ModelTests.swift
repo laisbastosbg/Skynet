@@ -12,7 +12,7 @@ import XCTest
 
 class ModelTests: XCTestCase {
     func testUserModel() throws {
-        let user = User(name: "Moyses", email: "m.mirazev@gmail.com", password: "senha123")
+        let user = User(id: "akjsfajsfja", name: "Moyses", email: "m.mirazev@gmail.com", password: "senha123")
         XCTAssert(user.name == "Moyses", "error - User Name")
         XCTAssert(user.email == "m.mirazev@gmail.com", "error - User Email")
         XCTAssert(user.password == "senha123", "error - User Password")

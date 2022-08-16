@@ -22,7 +22,7 @@ class MainController: UIViewController {
     lazy var buttonPost: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("get users", for: .normal)
+        button.setTitle("set users", for: .normal)
 
         button.addTarget(self, action: #selector(self.createUser(sender:)), for: .touchUpInside)
         return button
@@ -53,7 +53,7 @@ class MainController: UIViewController {
 
     @objc func createUser(sender: UIButton) {
         Task {
-            let user = User(name: "Joan", email: "Joan32@gmail.com", password: "sen22ha34")
+            let user = User(id: nil, name: "Monica", email: "monica@gmail.com", password: "sansao")
             await userViewModel.addUser(user: user)
         }
     }

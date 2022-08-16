@@ -24,7 +24,7 @@ class API {
         return []
     }
 
-    static func setUser(user: User) async -> Bool {
+    static func setUser(user: User) async throws -> User.createResponse {
             var urlRequest = URLRequest(url: URL(string: "http://localhost:8080/users")!)
             //Tratar
             urlRequest.httpMethod = "POST"
@@ -32,16 +32,19 @@ class API {
                 "Content-Type": "application/json",
             ]
 
-            do {
+//            do {
                 urlRequest.httpBody = try JSONEncoder().encode(user)
-                let (_, response) = try await URLSession.shared.data(for: urlRequest)
-                if let responseHeader = response as? HTTPURLResponse {
-                    return (responseHeader.statusCode == 200)
-                }
-            } catch {
-                print(error)
-            }
-            return false
+                let (data, _) = try await URLSession.shared.data(for: urlRequest)
+                
+                let user = try JSONDecoder().decode(User.createResponse.self, from: data)
+                
+                return user
+//                if let responseHeader = response as? HTTPURLResponse {
+//                    return (responseHeader.statusCode == 200)
+//                }
+//            } catch {
+//                print(error)
+//            }
         }
 
 

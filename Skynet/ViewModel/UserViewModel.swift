@@ -16,8 +16,12 @@ class UserViewModel: ObservableObject {
     }
 
     func addUser(user: User) async {
-        let didCreate = await API.setUser(user: user)
-        print(didCreate)
+        do {
+            let createdUser = try await API.setUser(user: user)
+            print(createdUser)
+        } catch {
+            print("Algo deu errado: \(error)" )
+        }
     }
 
 }

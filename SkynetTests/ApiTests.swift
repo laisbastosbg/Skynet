@@ -24,9 +24,9 @@ class ApiTests: XCTestCase {
         let url = URL(string: "http://localhost:8080/users")!
 
         let mockedUsers = [
-            User(name: "Lorem Ipsum 1", email: "loremipsum1@mail.com", password: nil),
-            User(name: "Lorem Ipsum 2", email: "loremipsum2@mail.com", password: nil),
-            User(name: "Lorem Ipsum 3", email: "loremipsum3@mail.com", password: nil)
+            User(id: "kanflkanflkna", name: "Lorem Ipsum 1", email: "loremipsum1@mail.com", password: nil),
+            User(id: "kanflkanflkna", name: "Lorem Ipsum 2", email: "loremipsum2@mail.com", password: nil),
+            User(id: "kanflkanflkna", name: "Lorem Ipsum 3", email: "loremipsum3@mail.com", password: nil)
         ]
 
         let mock = Mock(
@@ -38,7 +38,7 @@ class ApiTests: XCTestCase {
             ]
         )
         
-        mock.register()
+        mock.register() // quando o mock é registrado, as requisições passam a não alcançar o servidor
 
         let users = await API.getUsers()
 

@@ -7,8 +7,16 @@
 
 import Foundation
 
-struct User: Codable {
-  let name: String
-  let email: String
-  let password: String?
+struct User: Codable, Equatable {
+    let id: String?
+    let name: String
+    let email: String
+    let password: String?
+}
+
+extension User {
+    struct createResponse: Codable, Equatable {
+        let token: String
+        let user: User
+    }
 }
