@@ -15,7 +15,7 @@ struct User: Codable, Equatable {
 }
 
 extension User {
-    struct createResponse: Codable, Equatable {
+    struct withToken: Codable, Equatable {
         let token: String
         let user: User
     }

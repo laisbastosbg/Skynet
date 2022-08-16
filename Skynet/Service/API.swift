@@ -8,45 +8,31 @@
 import Foundation
 
 class API {
-    static func getUsers() async -> [User] {
+    static func getUsers(completion: @escaping ([User]) -> ()) {
         guard let url = URL(string: "http://localhost:8080/users") else { fatalError("missing url") }
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            print(data)
-            let users = try JSONDecoder().decode([User].self, from: data)
-            
-            return users
-        } catch {
-            print(error)
+
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            let users = try! JSONDecoder().decode([User].self, from: data!)
+            DispatchQueue.main.async {
+                completion(users)
+            }
         }
-        
-        return []
+        .resume()
     }
-
-    static func setUser(user: User) async throws -> User.createResponse {
-            var urlRequest = URLRequest(url: URL(string: "http://localhost:8080/users")!)
-            //Tratar
-            urlRequest.httpMethod = "POST"
-            urlRequest.allHTTPHeaderFields = [
-                "Content-Type": "application/json",
-            ]
-
-//            do {
-                urlRequest.httpBody = try JSONEncoder().encode(user)
-                let (data, _) = try await URLSession.shared.data(for: urlRequest)
-                
-                let user = try JSONDecoder().decode(User.createResponse.self, from: data)
-                
-                return user
-//                if let responseHeader = response as? HTTPURLResponse {
-//                    return (responseHeader.statusCode == 200)
-//                }
-//            } catch {
-//                print(error)
-//            }
-        }
-
-
-
+    
+    static func setUser(user: User) async throws -> User.withToken {
+        var urlRequest = URLRequest(url: URL(string: "http://localhost:8080/users")!)
+        //Tratar
+        urlRequest.httpMethod = "POST"
+        urlRequest.allHTTPHeaderFields = [
+            "Content-Type": "application/json",
+        ]
+        
+        urlRequest.httpBody = try JSONEncoder().encode(user)
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        let user = try JSONDecoder().decode(User.withToken.self, from: data)
+        
+        return user
+    }
 }
