@@ -9,12 +9,13 @@ import Foundation
 
 class UserViewModel: ObservableObject {
     var users: [User] = []
-
+    
     func fetchUsers() async {
-        let users = await API.getUsers()
-        print(users)
+        API.getUsers { (users) in
+            print(users)
+        }
     }
-
+    
     func addUser(user: User) async {
         do {
             let createdUser = try await API.setUser(user: user)
@@ -23,5 +24,5 @@ class UserViewModel: ObservableObject {
             print("Algo deu errado: \(error)" )
         }
     }
-
+    
 }

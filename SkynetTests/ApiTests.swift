@@ -40,16 +40,16 @@ class ApiTests: XCTestCase {
         
         mock.register() // quando o mock é registrado, as requisições passam a não alcançar o servidor
         
-        let users = await API.getUsers()
-        
-        XCTAssertEqual(users.count, 3)
+        API.getUsers { users in
+            XCTAssertEqual(users.count, 3)
+        }
     }
     
     func testSetUser() async throws {
         let url = URL(string: "http://localhost:8080/users")!
         
         let mockedUser = User(id: "asdaksdj", name: "Mafalda", email: "mafalda@gmail.com", password: "senhadamafalda")
-        let mockedCreatedUserResponse = User.createResponse(token: "alsfhaofo", user: mockedUser)
+        let mockedCreatedUserResponse = User.withToken(token: "alsfhaofo", user: mockedUser)
         
         let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [
             .post: try! JSONEncoder().encode(mockedCreatedUserResponse)
