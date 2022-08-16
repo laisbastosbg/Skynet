@@ -35,6 +35,7 @@ class UserViewModel: ObservableObject {
             let data = Data(accessToken.utf8)
             KeychainHelper.standard.save(data, service: "access-token", account: "skynet")
             
+            // precisa ser feito um tratamento pro caso de não existir o token na keychain
             let readData = KeychainHelper.standard.read(service: "access-token", account: "skynet")!
             let readAccessToken = String(data: readData, encoding: .utf8)!
             print("token: \(readAccessToken)")
