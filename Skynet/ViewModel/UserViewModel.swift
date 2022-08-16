@@ -29,6 +29,15 @@ class UserViewModel: ObservableObject {
         do {
             let responseData = try await API.authenticateUser(user: user)
             print(responseData)
+            
+            
+            let accessToken = responseData.token
+            let data = Data(accessToken.utf8)
+            KeychainHelper.standard.save(data, service: "access-token", account: "skynet")
+            
+            let readData = KeychainHelper.standard.read(service: "access-token", account: "skynet")!
+            let readAccessToken = String(data: readData, encoding: .utf8)!
+            print("token: \(readAccessToken)")
         } catch {
             print("Algo deu errado: \(error)" )
         }
