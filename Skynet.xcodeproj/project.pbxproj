@@ -10,6 +10,7 @@
 		0B3DF09F28A3CE080024CA72 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF09E28A3CE080024CA72 /* User.swift */; };
 		0B3DF0A228A3D0200024CA72 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF0A128A3D0200024CA72 /* UserViewModel.swift */; };
 		0B3DF0A528A3E8840024CA72 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DF0A428A3E8840024CA72 /* API.swift */; };
+		0BACFE5928ABD6500022D90C /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BACFE5828ABD6500022D90C /* KeychainHelper.swift */; };
 		952DF2E828A536DE009BBD95 /* ApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DF2E728A536DE009BBD95 /* ApiTests.swift */; };
 		952DF2F128A53A1B009BBD95 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 952DF2F028A53A1B009BBD95 /* Mocker */; };
 		952DF2F328A54499009BBD95 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952DF2F228A54499009BBD95 /* ModelTests.swift */; };
@@ -44,6 +45,7 @@
 		0B3DF09E28A3CE080024CA72 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0B3DF0A128A3D0200024CA72 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		0B3DF0A428A3E8840024CA72 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0BACFE5828ABD6500022D90C /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		952DF2E728A536DE009BBD95 /* ApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTests.swift; sourceTree = "<group>"; };
 		952DF2F228A54499009BBD95 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		954A193D28A29FFE004C97D9 /* Skynet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skynet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0BACFE5728ABD5F70022D90C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0BACFE5828ABD6500022D90C /* KeychainHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		952DF2E928A5370F009BBD95 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 		954A193F28A29FFE004C97D9 /* Skynet */ = {
 			isa = PBXGroup;
 			children = (
+				0BACFE5728ABD5F70022D90C /* Helpers */,
 				0B3DF0A928A3ED3A0024CA72 /* View */,
 				0B3DF0A328A3E8750024CA72 /* Service */,
 				0B3DF0A028A3CFF90024CA72 /* ViewModel */,
@@ -321,6 +332,7 @@
 				954A194528A29FFE004C97D9 /* MainController.swift in Sources */,
 				954A194128A29FFE004C97D9 /* AppDelegate.swift in Sources */,
 				0B3DF0A228A3D0200024CA72 /* UserViewModel.swift in Sources */,
+				0BACFE5928ABD6500022D90C /* KeychainHelper.swift in Sources */,
 				0B3DF0A528A3E8840024CA72 /* API.swift in Sources */,
 				954A194328A29FFE004C97D9 /* SceneDelegate.swift in Sources */,
 			);
