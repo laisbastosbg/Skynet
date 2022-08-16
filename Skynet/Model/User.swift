@@ -19,4 +19,9 @@ extension User {
         let token: String
         let user: User
     }
+    
+    struct authentication: Codable, Equatable {
+        let username: String
+        let password: String
+    }
 }
