@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "mocker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WeTransfer/Mocker",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6242c5c834c97b7efd784e5f2b5613d8cf07e57d"
+      }
+    }
+  ],
+  "version" : 2
+}
