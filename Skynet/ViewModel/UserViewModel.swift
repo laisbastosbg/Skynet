@@ -7,18 +7,16 @@
 
 import Foundation
 
-class UserViewModel: ObservableObject {
-    var users: [User] = []
-    
+class UserViewModel {
     func fetchUsers() async {
-        API.getUsers { (users) in
+        UserService.getUsers { (users) in
             print(users)
         }
     }
     
     func addUser(user: User) async {
         do {
-            let createdUser = try await API.setUser(user: user)
+            let createdUser = try await UserService.setUser(user: user)
             print(createdUser)
         } catch {
             print("Algo deu errado: \(error)" )
@@ -27,7 +25,7 @@ class UserViewModel: ObservableObject {
     
     func login(user: User.authentication) async {
         do {
-            let responseData = try await API.authenticateUser(user: user)
+            let responseData = try await UserService.authenticateUser(user: user)
             print(responseData)
             
             
@@ -46,7 +44,7 @@ class UserViewModel: ObservableObject {
     
     func logout(token: String) async {
         do {
-            let responseData = try await API.logout(token: token)
+            let responseData = try await UserService.logout(token: token)
             print(responseData)
         } catch {
             print("Algo deu errado no logout: \(error)" )
