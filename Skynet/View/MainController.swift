@@ -7,76 +7,47 @@
 
 import UIKit
 
-class MainController: UIViewController {
-    let userViewModel: UserViewModel = UserViewModel()
-    
-    lazy var button: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("get users", for: .normal)
-        
-        button.addTarget(self, action: #selector(self.getUsers(sender: )), for: .touchUpInside)
-        return button
-    }()
-
-    lazy var buttonPost: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("set users", for: .normal)
-
-        button.addTarget(self, action: #selector(self.createUser(sender:)), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("login", for: .normal)
-
-        button.addTarget(self, action: #selector(self.login(sender:)), for: .touchUpInside)
-        return button
-    }()
-
+class MainController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(button)
-        view.addSubview(buttonPost)
-        view.addSubview(loginButton)
-        NSLayoutConstraint.activate([
-
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -10),
-
-
-            buttonPost.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonPost.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 10),
-            
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 22)
-        ])
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .green
+        setUpView()
     }
 
+    func setUpView() {
+        let homeController = UINavigationController(rootViewController: HomeController())
+        let seachController = UINavigationController(rootViewController: SeachController())
+        let publishController = UINavigationController(rootViewController: PublishController())
+        let notificationController = UINavigationController(rootViewController: NotificationController())
+        let userController = UINavigationController(rootViewController: UserController())
 
-    @objc func getUsers(sender: UIButton) {
-        Task {
-            await userViewModel.fetchUsers()
-        }
-    }
 
-    @objc func createUser(sender: UIButton) {
-        Task {
-            let user = User(id: nil, name: "Monica", email: "monica@gmail.com", password: "sansao")
-            await userViewModel.addUser(user: user)
-        }
-    }
-    
-    @objc func login(sender: UIButton) {
-        Task {
-            let user = User.authentication(username: "monica@gmail.com", password: "sansao")
-            await userViewModel.login(user: user)
-        }
-    }
 
+        self.setViewControllers([homeController, seachController, publishController, notificationController, userController], animated: true)
+        self.tabBar.backgroundColor = .white
+        self.tabBar.isTranslucent = false
+
+        guard let items = self.tabBar.items else {return}
+
+        items[0].title = "Home"
+        items[0].image = UIImage(systemName: "house.fill")
+        //gearshape engrenagem config
+        items[1].title = "Seach"
+        items[1].image = UIImage(systemName: "magnifyingglass")
+
+        items[2].title = "Publish"
+        items[2].image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
+
+        items[3].title = "Notification"
+        items[3].image = UIImage(systemName: "star")
+
+        items[4].title = "User"
+        items[4].image = UIImage(systemName: "person")
+    }
 }
+
+
+
+
+
 
