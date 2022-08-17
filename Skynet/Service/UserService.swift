@@ -36,7 +36,7 @@ class UserService: API {
         return user
     }
     
-    static func authenticateUser(user: User.authentication) async throws -> User.withToken {
+    static func authenticateUser(user: User.authentication) async throws -> (Int, User.withToken?) {
         let loginString = "\(user.username):\(user.password)"
         
         guard let loginData = loginString.data(using:String.Encoding.utf8) else {
@@ -50,11 +50,19 @@ class UserService: API {
         urlRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
 
         urlRequest.httpBody = try JSONEncoder().encode(user)
-        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        let user = try JSONDecoder().decode(User.withToken.self, from: data)
+        guard let status = (response as? HTTPURLResponse)?.statusCode else {
+                    fatalError("Algo está errado com a resposta do servidor")
+                }
         
-        return user
+        do {
+            let user = try JSONDecoder().decode(User.withToken.self, from: data)
+            
+            return (status, user)
+        } catch {
+            return (status, nil)
+        }
     }
     
     static func logout(token: String) async throws -> Int {
