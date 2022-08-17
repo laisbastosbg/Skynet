@@ -13,6 +13,6 @@ struct Post: Codable, Equatable {
     let media: String?
     let like_count: Int?
     let user_id: String
-    let created_at: Date
-    let updated_at: Date?
+    let created_at: String
+    let updated_at: String?
 }
