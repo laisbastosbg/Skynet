@@ -23,4 +23,27 @@ class PostService: API {
 
             return []
         }
+    
+    static func setPost(_ post: Post.create, _ contentType: String, _ token: String) async throws -> Post {
+        var urlRequest = URLRequest(url: URL(string: "\(baseURL)/posts")!)
+        
+        urlRequest.httpMethod = "POST"
+        urlRequest.allHTTPHeaderFields = [
+            "Content-Type": contentType,
+        ]
+        
+        urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        urlRequest.httpBody = try JSONEncoder().encode(post)
+        
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        if let responseHeader = response as? HTTPURLResponse {
+            print("status: \(responseHeader.statusCode)")
+        }
+        
+        let post = try JSONDecoder().decode(Post.self, from: data)
+        
+        return post
+    }
 }

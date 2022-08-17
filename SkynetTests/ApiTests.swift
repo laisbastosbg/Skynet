@@ -124,7 +124,32 @@ class ApiTests: XCTestCase {
         let expected = mockedPosts
         
         let output = await PostService.getPosts()
+
+        XCTAssertEqual(expected, output)
+    }
+    
+    func testSetTextPost() async throws {
+        
+        let url = URL(string: "http://localhost:8080/posts")!
+        
+        let mockedPost = Post.create(content: "\"Mas eu não quero me encontrar com gente louca\", observou Alice.\" Você não pode evitar isso\", replicou o gato.\"Todos nós aqui somos loucos.Eu sou louco,você é louca\".\"Como você sabe que eu sou louca?\" indagou Alice.\"Deve ser\", disse o gato, \"Ou não estaria aqui\".")
+        
+        let mockedResponse = Post(id: "D0AEDC93-9CDE-4423-A5AC-3748BECC0CDD", content: "\"Mas eu não quero me encontrar com gente louca\", observou Alice.\" Você não pode evitar isso\", replicou o gato.\"Todos nós aqui somos loucos.Eu sou louco,você é louca\".\"Como você sabe que eu sou louca?\" indagou Alice.\"Deve ser\", disse o gato, \"Ou não estaria aqui\".", media: nil, like_count: 0, user_id: "62AD71E6-78CC-47D9-A6B0-FAE4F654F6C3", created_at: "2022-08-17T13:26:26Z", updated_at: nil)
+        
+        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [
+            .post: try! JSONEncoder().encode(mockedResponse)
+        ])
+        
+        mock.register()
+        
+        let token = "aslfhafaklfa"
+        
+        let contentType = "text/plain"
+        
+        let expected = mockedResponse
+        let output = try await PostService.setPost(mockedPost, contentType, token)
         
         XCTAssertEqual(expected, output)
+        
     }
 }

@@ -26,7 +26,7 @@ class UserViewModel {
     func login(user: User.authentication) async {
         do {
             let responseData = try await UserService.authenticateUser(user: user)
-            print(responseData)
+            print("responseData: \(responseData)")
             
             
             let accessToken = responseData.token
@@ -45,7 +45,7 @@ class UserViewModel {
     func logout(token: String) async {
         do {
             let responseData = try await UserService.logout(token: token)
-            print(responseData)
+            print("responseData: \(responseData)")
         } catch {
             print("Algo deu errado no logout: \(error)" )
         }

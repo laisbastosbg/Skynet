@@ -66,13 +66,14 @@ class UserService: API {
 
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        let user = try JSONDecoder().decode(User.withToken.self, from: data)
-        print(user)
-        
         if let responseHeader = response as? HTTPURLResponse {
             return responseHeader.statusCode
         }
         
-        return 500
+        let user = try JSONDecoder().decode(User.withToken.self, from: data)
+        print(user)
+        
+        let internalServerError = 500
+        return internalServerError
     }
 }

@@ -24,7 +24,15 @@ final class KeychainHelper {
         let status = SecItemAdd(query, nil)
         
         if status != errSecSuccess {
-            print("Error: \(status)")
+            let duplicateItemStatusCode = -25299
+            
+            if status == duplicateItemStatusCode {
+                let attributesToUpdate = [kSecValueData: data] as CFDictionary
+                
+                SecItemUpdate(query, attributesToUpdate)
+            } else {
+                print("Error: \(status)")
+            }
         }
     }
     
