@@ -9,6 +9,7 @@ import UIKit
 
 class MainController: UIViewController {
     let userViewModel: UserViewModel = UserViewModel()
+    let postViewModel: PostViewModel = PostViewModel()
     
     lazy var button: UIButton = {
         let button = UIButton(type: .system)
@@ -45,6 +46,15 @@ class MainController: UIViewController {
         button.addTarget(self, action: #selector(self.logout(sender:)), for: .touchUpInside)
         return button
     }()
+    
+    lazy var listPostsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("get posts", for: .normal)
+
+        button.addTarget(self, action: #selector(self.getPosts(sender:)), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +62,7 @@ class MainController: UIViewController {
         view.addSubview(buttonPost)
         view.addSubview(loginButton)
         view.addSubview(logoutButton)
+        view.addSubview(listPostsButton)
         NSLayoutConstraint.activate([
 
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -61,10 +72,13 @@ class MainController: UIViewController {
             buttonPost.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 10),
             
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 30
-                                                ),
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 30),
+            
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 50),
+            
+            listPostsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            listPostsButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 70),
         ])
         // Do any additional setup after loading the view.
     }
@@ -99,6 +113,13 @@ class MainController: UIViewController {
             
             let token = String(data: tokenData, encoding: .utf8)!
             await userViewModel.logout(token: token)
+        }
+    }
+    
+    
+    @objc func getPosts(sender: UIButton) {
+        Task {
+            await postViewModel.fetchPosts()
         }
     }
 
