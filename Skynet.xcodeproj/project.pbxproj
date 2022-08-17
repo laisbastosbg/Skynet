@@ -26,6 +26,13 @@
 		954A195828A29FFF004C97D9 /* SkynetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A195728A29FFF004C97D9 /* SkynetTests.swift */; };
 		954A196228A29FFF004C97D9 /* SkynetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A196128A29FFF004C97D9 /* SkynetUITests.swift */; };
 		954A196428A29FFF004C97D9 /* SkynetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954A196328A29FFF004C97D9 /* SkynetUITestsLaunchTests.swift */; };
+		95FD488928ABF80900F313F4 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD488828ABF80800F313F4 /* UserController.swift */; };
+		95FD488B28ABF82900F313F4 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD488A28ABF82900F313F4 /* NotificationController.swift */; };
+		95FD488D28ABF8BB00F313F4 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD488C28ABF8BB00F313F4 /* PublishController.swift */; };
+		95FD488F28ABF8D800F313F4 /* SeachController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD488E28ABF8D800F313F4 /* SeachController.swift */; };
+		95FD489128ABF8FB00F313F4 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD489028ABF8FB00F313F4 /* HomeController.swift */; };
+		95FD489328ABFB3700F313F4 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD489228ABFB3700F313F4 /* Login.swift */; };
+		95FD489528ABFB5F00F313F4 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FD489428ABFB5F00F313F4 /* Registration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +75,13 @@
 		954A195D28A29FFF004C97D9 /* SkynetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkynetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		954A196128A29FFF004C97D9 /* SkynetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkynetUITests.swift; sourceTree = "<group>"; };
 		954A196328A29FFF004C97D9 /* SkynetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkynetUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		95FD488828ABF80800F313F4 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		95FD488A28ABF82900F313F4 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		95FD488C28ABF8BB00F313F4 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
+		95FD488E28ABF8D800F313F4 /* SeachController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachController.swift; sourceTree = "<group>"; };
+		95FD489028ABF8FB00F313F4 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		95FD489228ABFB3700F313F4 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		95FD489428ABFB5F00F313F4 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +141,14 @@
 		0B3DF0A928A3ED3A0024CA72 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95FD489228ABFB3700F313F4 /* Login.swift */,
+				95FD489428ABFB5F00F313F4 /* Registration.swift */,
 				954A194428A29FFE004C97D9 /* MainController.swift */,
+				95FD489028ABF8FB00F313F4 /* HomeController.swift */,
+				95FD488E28ABF8D800F313F4 /* SeachController.swift */,
+				95FD488C28ABF8BB00F313F4 /* PublishController.swift */,
+				95FD488828ABF80800F313F4 /* UserController.swift */,
+				95FD488A28ABF82900F313F4 /* NotificationController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,14 +364,21 @@
 				0B3DF09F28A3CE080024CA72 /* User.swift in Sources */,
 				954A194528A29FFE004C97D9 /* MainController.swift in Sources */,
 				0BACFE5D28AC03D80022D90C /* UserService.swift in Sources */,
+				95FD489528ABFB5F00F313F4 /* Registration.swift in Sources */,
+				95FD489328ABFB3700F313F4 /* Login.swift in Sources */,
+				95FD488928ABF80900F313F4 /* UserController.swift in Sources */,
 				954A194128A29FFE004C97D9 /* AppDelegate.swift in Sources */,
 				0BACFE5B28AC02B90022D90C /* Post.swift in Sources */,
 				0BACFE5F28AC05640022D90C /* PostService.swift in Sources */,
 				0B3DF0A228A3D0200024CA72 /* UserViewModel.swift in Sources */,
 				0BACFE6128AD078D0022D90C /* PostViewModel.swift in Sources */,
 				0BACFE5928ABD6500022D90C /* KeychainHelper.swift in Sources */,
+				95FD488B28ABF82900F313F4 /* NotificationController.swift in Sources */,
 				0B3DF0A528A3E8840024CA72 /* API.swift in Sources */,
+				95FD489128ABF8FB00F313F4 /* HomeController.swift in Sources */,
 				954A194328A29FFE004C97D9 /* SceneDelegate.swift in Sources */,
+				95FD488D28ABF8BB00F313F4 /* PublishController.swift in Sources */,
+				95FD488F28ABF8D800F313F4 /* SeachController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
