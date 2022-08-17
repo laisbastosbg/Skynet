@@ -119,6 +119,15 @@ class MainController: UIViewController {
         
         print(token)
         
+        guard let userData = KeychainHelper.standard.read(service: "user-id", account: "skynet") else {
+            print("nenhum valor encontrado")
+            return
+        }
+        
+        let userID = String(data: userData, encoding: .utf8)!
+        
+        print(userID)
+        
     }
     
     @objc func getUsers(sender: UIButton) {
