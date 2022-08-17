@@ -16,3 +16,9 @@ struct Post: Codable, Equatable {
     let created_at: String
     let updated_at: String?
 }
+
+extension Post {
+    struct create: Codable, Equatable {
+        let content: String
+    }
+}
