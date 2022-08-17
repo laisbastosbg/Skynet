@@ -23,22 +23,34 @@ class UserViewModel {
         }
     }
     
-    func login(user: User.authentication) async {
+    func login(user: User.authentication) async -> Int {
         do {
             let responseData = try await UserService.authenticateUser(user: user)
             print("responseData: \(responseData)")
             
+            let statusCode = responseData.0
             
-            let accessToken = responseData.token
-            let data = Data(accessToken.utf8)
-            KeychainHelper.standard.save(data, service: "access-token", account: "skynet")
+            if let responseBody = responseData.1 {
+                let accessToken = responseBody.token
+                let tokenData = Data(accessToken.utf8)
+                KeychainHelper.standard.save(tokenData, service: "access-token", account: "skynet")
+                
+                let userID = responseBody.user.id!
+                let userData = Data(userID.utf8)
+                KeychainHelper.standard.save(userData, service: "user-id", account: "skynet")
+
+                
+            } else {
+                if statusCode == 401 {
+                    print("Login ou senha incorretos")
+                }
+            }
             
-            // precisa ser feito um tratamento pro caso de não existir o token na keychain
-            let readData = KeychainHelper.standard.read(service: "access-token", account: "skynet")!
-            let readAccessToken = String(data: readData, encoding: .utf8)!
-            print("token: \(readAccessToken)")
+            return statusCode
+            
         } catch {
             print("Algo deu errado: \(error)" )
+            return 0
         }
     }
     

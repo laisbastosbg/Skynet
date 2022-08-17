@@ -77,9 +77,9 @@ class ApiTests: XCTestCase {
         
         mock.register()
         
-        let expected = mockedCreatedUserResponse
-        let output = try! await UserService.authenticateUser(user: mockedUser)
-        
+        let expected = (mockedCreatedUserResponse)
+        let response = try! await UserService.authenticateUser(user: mockedUser)
+        let output = response.1
         XCTAssertEqual(expected, output)
     }
     
