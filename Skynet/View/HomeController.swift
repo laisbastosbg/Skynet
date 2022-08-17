@@ -12,6 +12,13 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     var album: [String] = ["OI", "blz", "dsfsdf", "fsdfdsfds"]
 
+    lazy var cellView: UIView = {
+        let cellview = UIView(frame: CGRect())
+        cellview.backgroundColor = .blue
+        return cellview
+    }()
+
+
     lazy var collectionViewPosts: UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
