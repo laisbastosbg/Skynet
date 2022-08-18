@@ -50,7 +50,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionViewPosts.dataSource = self
         collectionViewPosts.delegate = self
         collectionViewPosts.register(CellPost.self, forCellWithReuseIdentifier: "collectionViewPosts")
-        collectionViewPosts.backgroundColor = .red
+//        collectionViewPosts.backgroundColor = .red
         collectionViewPosts.translatesAutoresizingMaskIntoConstraints = false
         return collectionViewPosts
 
@@ -59,7 +59,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .gray
         self.title = "User"
         view.addSubview(imageUser)
         view.addSubview(labelName)
