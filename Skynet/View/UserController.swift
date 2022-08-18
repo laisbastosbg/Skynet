@@ -33,7 +33,7 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     lazy var labelEmail: UILabel = {
         let labelEmail = UILabel(frame: CGRect())
-        labelEmail.text = "Name"
+        labelEmail.text = "m.mirazev@gmail"
         labelEmail.textAlignment = NSTextAlignment.center;
         labelEmail.translatesAutoresizingMaskIntoConstraints = false
         return labelEmail
@@ -88,7 +88,10 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func setUpConstraints(){
-        setUpConstraints()
+        setUpConstraintsLabelName()
+        setUpConstraintsLabelEmail()
+        setUpConstraintsCollectionViewPosts()
+
     }
     func setUpConstraintsCollectionViewPosts(){
         NSLayoutConstraint.activate([
@@ -96,6 +99,26 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
             collectionViewPosts.heightAnchor.constraint(equalTo: self.view.heightAnchor),
             collectionViewPosts.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             collectionViewPosts.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: self.view.frame.height / 3)
+        ])
+    }
+
+    func setUpConstraintsLabelName(){
+        NSLayoutConstraint.activate([
+            labelName.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            labelName.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -180),
+            labelName.heightAnchor.constraint(equalTo: view.heightAnchor,
+                                                   multiplier: 0.05),
+            labelName.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
+
+    func setUpConstraintsLabelEmail(){
+        NSLayoutConstraint.activate([
+            labelEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            labelEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
+            labelEmail.heightAnchor.constraint(equalTo: view.heightAnchor,
+                                                   multiplier: 0.05),
+            labelEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
     }
 }

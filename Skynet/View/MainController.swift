@@ -21,7 +21,9 @@ class MainController: UITabBarController {
 //        let notificationController = UINavigationController(rootViewController: NotificationController())
         let userController = UINavigationController(rootViewController: UserController())
 
-        self.setViewControllers([homeController, publishController, userController], animated: true)
+        let logout = UINavigationController(rootViewController: Logout())
+
+        self.setViewControllers([homeController, publishController, userController, logout], animated: true)
         self.tabBar.backgroundColor = .white
         self.tabBar.isTranslucent = false
 
@@ -29,6 +31,7 @@ class MainController: UITabBarController {
 
         items[0].title = "Home"
         items[0].image = UIImage(systemName: "house.fill")
+        
         //gearshape engrenagem config
 //        items[].title = "Seach"
 //        items[].image = UIImage(systemName: "magnifyingglass")
@@ -41,6 +44,9 @@ class MainController: UITabBarController {
 
         items[2].title = "User"
         items[2].image = UIImage(systemName: "person")
+
+        items[3].title = "Config"
+        items[3].image = UIImage(systemName: "gearshape")
     }
 }
 
