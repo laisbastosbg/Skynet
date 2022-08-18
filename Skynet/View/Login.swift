@@ -50,31 +50,59 @@ class LoginController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let apresentationController = Apresentation()
+        if let sheet = apresentationController.sheetPresentationController{
+            sheet.detents = [.large()]
+        }
+        self.present(apresentationController, animated: true)
+
         view.backgroundColor = .gray
         view.addSubview(textFieldEmail)
         view.addSubview(textFieldPassword)
         view.addSubview(buttonLogin)
         view.addSubview(buttonRegistration)
+        setConstraints()
+    }
 
+    func setConstraints(){
+        setConstraintTextFieldEmail()
+        setConstraintTextFieldPassword()
+        setConstraintButtonLogin()
+        setConstraintButtonRegistration()
+    }
+
+    func setConstraintTextFieldEmail() {
         NSLayoutConstraint.activate([
             textFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
             textFieldEmail.heightAnchor.constraint(equalTo: view.heightAnchor,
                                                    multiplier: 0.05),
             textFieldEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintTextFieldPassword() {
+        NSLayoutConstraint.activate([
             textFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             textFieldPassword.heightAnchor.constraint(equalTo: view.heightAnchor,
                                                    multiplier: 0.05),
             textFieldPassword.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintButtonLogin() {
+        NSLayoutConstraint.activate([
             buttonLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             buttonLogin.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
             buttonLogin.heightAnchor.constraint(equalTo: view.heightAnchor,
                                                    multiplier: 0.05),
             buttonLogin.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintButtonRegistration() {
+        NSLayoutConstraint.activate([
             buttonRegistration.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             buttonRegistration.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),
             buttonRegistration.heightAnchor.constraint(equalTo: view.heightAnchor,

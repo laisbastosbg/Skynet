@@ -22,7 +22,7 @@ class PublishController: UIViewController {
         let buttonSent = UIButton(type: .system)
         buttonSent.backgroundColor = .blue
         buttonSent.translatesAutoresizingMaskIntoConstraints = false
-        buttonSent.setTitle("Sent", for: .normal)
+        buttonSent.setTitle("Send", for: .normal)
         buttonSent.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         buttonSent.setTitleColor(.white, for: .normal)
 //        button.addTarget(self, action: #selector(login), for: .touchUpInside)
@@ -45,7 +45,6 @@ class PublishController: UIViewController {
             textFieldPost.heightAnchor.constraint(equalTo: view.heightAnchor,
                                                   multiplier: 0.7),
             textFieldPost.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-
 
 
             buttonSent.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),

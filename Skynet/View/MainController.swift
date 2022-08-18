@@ -16,14 +16,12 @@ class MainController: UITabBarController {
 
     func setUpView() {
         let homeController = UINavigationController(rootViewController: HomeController())
-        let seachController = UINavigationController(rootViewController: SeachController())
+//        let seachController = UINavigationController(rootViewController: SeachController())
         let publishController = UINavigationController(rootViewController: PublishController())
-        let notificationController = UINavigationController(rootViewController: NotificationController())
+//        let notificationController = UINavigationController(rootViewController: NotificationController())
         let userController = UINavigationController(rootViewController: UserController())
 
-
-
-        self.setViewControllers([homeController, seachController, publishController, notificationController, userController], animated: true)
+        self.setViewControllers([homeController, publishController, userController], animated: true)
         self.tabBar.backgroundColor = .white
         self.tabBar.isTranslucent = false
 
@@ -32,17 +30,17 @@ class MainController: UITabBarController {
         items[0].title = "Home"
         items[0].image = UIImage(systemName: "house.fill")
         //gearshape engrenagem config
-        items[1].title = "Seach"
-        items[1].image = UIImage(systemName: "magnifyingglass")
+//        items[].title = "Seach"
+//        items[].image = UIImage(systemName: "magnifyingglass")
 
-        items[2].title = "Publish"
-        items[2].image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
+        items[1].title = "Publish"
+        items[1].image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")
 
-        items[3].title = "Notification"
-        items[3].image = UIImage(systemName: "star")
+        //items[].title = "Notification"
+        //items[].image = UIImage(systemName: "star")
 
-        items[4].title = "User"
-        items[4].image = UIImage(systemName: "person")
+        items[2].title = "User"
+        items[2].image = UIImage(systemName: "person")
     }
 }
 
