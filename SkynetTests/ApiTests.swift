@@ -45,6 +45,23 @@ class ApiTests: XCTestCase {
         }
     }
     
+    func testGetUserByID() async throws {
+        let mockedID = "aslmfamsflml"
+        let url = URL(string: "http://localhost:8080/users/\(mockedID)")!
+        
+        let mockedUser = User(id: mockedID, name: "Chiquinha", email: "chiquinha@gmail.com", password: nil)
+        
+        let mock = Mock(url: url, dataType: .json, statusCode: 200, data: [
+            .get: try! JSONEncoder().encode(mockedUser)])
+        
+        mock.register()
+        
+        let expected = mockedUser
+        let output = try! await UserService.getUserByID(id: mockedID)
+        
+        XCTAssertEqual(expected, output)
+    }
+    
     func testSetUser() async throws {
         let url = URL(string: "http://localhost:8080/users")!
         
