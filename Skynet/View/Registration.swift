@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class RegistrationController: UIViewController {
+    let userViewModel = UserViewModel()
+    
     lazy var textFieldTittle: UITextView = {
         let textFieldTittle = UITextView(frame: CGRect())
         textFieldTittle.text = "SignIn"
@@ -52,10 +54,10 @@ class RegistrationController: UIViewController {
         let buttonRegister = UIButton(type: .system)
         buttonRegister.backgroundColor = .blue
         buttonRegister.translatesAutoresizingMaskIntoConstraints = false
-        buttonRegister.setTitle("Login", for: .normal)
+        buttonRegister.setTitle("Sign In", for: .normal)
         buttonRegister.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         buttonRegister.setTitleColor(.white, for: .normal)
-//        buttonRegister.addTarget(self, action: #selector(login), for: .touchUpInside)
+        buttonRegister.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return buttonRegister
     }()
 
@@ -66,7 +68,7 @@ class RegistrationController: UIViewController {
         view.addSubview(textFieldName)
         view.addSubview(textFieldEmail)
         view.addSubview(textFieldPassword)
-        view.addSubview(textFieldConfirmPassword)
+//        view.addSubview(textFieldConfirmPassword)
         view.addSubview(buttonRegister)
         self.title = "Seach"
         setConstraints()
@@ -77,7 +79,7 @@ class RegistrationController: UIViewController {
         setConstraintTextFieldName()
         setConstraintTextFieldEmail()
         setConstraintTextFieldPassword()
-        setConstraintTextFieldConfirmPassword()
+//        setConstraintTextFieldConfirmPassword()
         setConstraintButtonRegister()
     }
 
@@ -134,5 +136,25 @@ class RegistrationController: UIViewController {
             buttonRegister.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             buttonRegister.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
+    }
+    
+    @objc func signIn() {
+        let name = textFieldName.text!
+        let email = textFieldEmail.text!
+        let password = textFieldPassword.text!
+        
+        if(
+            email.count < 1 ||
+            name.count < 1 ||
+            password.count < 1
+        ) {
+            print("vazio")
+        } else {
+            let user = User(id: nil, name: name, email: email, password: password)
+            
+            Task {
+                await userViewModel.addUser(user: user)
+            }
+        }
     }
 }
