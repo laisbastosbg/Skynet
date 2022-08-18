@@ -10,7 +10,7 @@ import Foundation
 class UserService: API {
     static func getUsers(completion: @escaping ([User]) -> ()) {
         guard let url = URL(string: "\(baseURL)/users") else { fatalError("missing url") }
-
+        
         URLSession.shared.dataTask(with: url) { data, _, _ in
             let users = try! JSONDecoder().decode([User].self, from: data!)
             DispatchQueue.main.async {
@@ -18,6 +18,16 @@ class UserService: API {
             }
         }
         .resume()
+    }
+    
+    static func getUserByID(id: String) async throws -> User {
+        guard let url = URL(string: "\(baseURL)/users/\(id)") else { fatalError("missing url") }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        print(data)
+        let user = try JSONDecoder().decode(User.self, from: data)
+        
+        return user
     }
     
     static func setUser(user: User) async throws -> User.withToken {
@@ -48,13 +58,13 @@ class UserService: API {
         
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-
+        
         urlRequest.httpBody = try JSONEncoder().encode(user)
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
         guard let status = (response as? HTTPURLResponse)?.statusCode else {
-                    fatalError("Algo está errado com a resposta do servidor")
-                }
+            fatalError("Algo está errado com a resposta do servidor")
+        }
         
         do {
             let user = try JSONDecoder().decode(User.withToken.self, from: data)
@@ -71,7 +81,7 @@ class UserService: API {
         
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
+        
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
         if let responseHeader = response as? HTTPURLResponse {
