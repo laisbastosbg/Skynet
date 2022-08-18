@@ -65,13 +65,13 @@ class LoginController: UIViewController {
     }
 
     func setConstraints(){
-        setConstraintTextFieldEmail()
-        setConstraintTextFieldPassword()
-        setConstraintButtonLogin()
-        setConstraintButtonRegistration()
+        setConstraintsTextFieldEmail()
+        setConstraintsTextFieldPassword()
+        setConstraintsButtonLogin()
+        setConstraintsButtonRegistration()
     }
 
-    func setConstraintTextFieldEmail() {
+    func setConstraintsTextFieldEmail() {
         NSLayoutConstraint.activate([
             textFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
@@ -81,7 +81,7 @@ class LoginController: UIViewController {
         ])
     }
 
-    func setConstraintTextFieldPassword() {
+    func setConstraintsTextFieldPassword() {
         NSLayoutConstraint.activate([
             textFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
@@ -91,7 +91,7 @@ class LoginController: UIViewController {
         ])
     }
 
-    func setConstraintButtonLogin() {
+    func setConstraintsButtonLogin() {
         NSLayoutConstraint.activate([
             buttonLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             buttonLogin.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
@@ -101,7 +101,7 @@ class LoginController: UIViewController {
         ])
     }
 
-    func setConstraintButtonRegistration() {
+    func setConstraintsButtonRegistration() {
         NSLayoutConstraint.activate([
             buttonRegistration.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             buttonRegistration.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20),

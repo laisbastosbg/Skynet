@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-class Cell: UICollectionViewCell {
+class CellPost: UICollectionViewCell {
     lazy var labelName: UILabel = {
         let labelName = UILabel(frame: CGRect())
-        labelName.text = "Name"
+        labelName.text = "@Laís"
         labelName.textAlignment = NSTextAlignment.center;
         labelName.translatesAutoresizingMaskIntoConstraints = false
         return labelName
@@ -19,7 +19,7 @@ class Cell: UICollectionViewCell {
 
     lazy var labelHours: UILabel = {
         let labelHours = UILabel(frame: CGRect())
-        labelHours.text = "Horas"
+        labelHours.text = "Qui 18 de ago. 2022"
         labelHours.textAlignment = NSTextAlignment.center;
         labelHours.translatesAutoresizingMaskIntoConstraints = false
         return labelHours
@@ -114,7 +114,6 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     var album: [String] = ["OI", "blz", "dsfsdf", "fsdfdsfds"]
 
-
     lazy var collectionViewPosts: UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
@@ -125,7 +124,7 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let collectionViewPosts: UICollectionView  = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionViewPosts.dataSource = self
         collectionViewPosts.delegate = self
-        collectionViewPosts.register(Cell.self, forCellWithReuseIdentifier: "collectionViewPosts")
+        collectionViewPosts.register(CellPost.self, forCellWithReuseIdentifier: "collectionViewPosts")
         collectionViewPosts.backgroundColor = .red
         collectionViewPosts.translatesAutoresizingMaskIntoConstraints = false
         return collectionViewPosts
@@ -137,7 +136,7 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewPosts", for: indexPath) as! Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewPosts", for: indexPath) as! CellPost
         cell.labelPost.text = album[indexPath.item]
         //        let text = UITextView(frame: CGRect())
         //        text.text = album[indexPath.item]
@@ -168,7 +167,7 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
         ])
     }
 
-    func setUpConstraintCollectionViewPosts(){
-
+    func setUpConstraintsCollectionViewPosts(){
+        
     }
 }
