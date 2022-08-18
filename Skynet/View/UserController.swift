@@ -13,11 +13,16 @@ import UIKit
 class UserController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var album = ["Oi", "dfsfd", "34234", "324234", "dslfnsd", "Oi", "dfsfd", "34234", "324234", "dslfnsd"]
 
-    lazy var imageUser: UIImage = {
-        let imageUser = UIImage(systemName: "person")
-        return imageUser!
+    lazy var imageUser: UIView = {
+        let image = UIImage(systemName: "person")
+        let imageUser = UIImageView(image: image)
+        imageUser.image = image
+        imageUser.contentMode = .scaleAspectFill
+        imageUser.translatesAutoresizingMaskIntoConstraints = false
+        return imageUser
     }()
 
+    
     lazy var labelName: UILabel = {
         let labelName = UILabel(frame: CGRect())
         labelName.text = "@Mirazev"
@@ -56,8 +61,11 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         view.backgroundColor = .red
         self.title = "User"
+        view.addSubview(imageUser)
+        view.addSubview(labelName)
+        view.addSubview(labelEmail)
         view.addSubview(collectionViewPosts)
-        self.setUpCollectionViewPostsConstraints()
+        self.setUpConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -79,7 +87,10 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
 
-    func setUpCollectionViewPostsConstraints(){
+    func setUpConstraints(){
+        setUpConstraints()
+    }
+    func setUpConstraintsCollectionViewPosts(){
         NSLayoutConstraint.activate([
             collectionViewPosts.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             collectionViewPosts.heightAnchor.constraint(equalTo: self.view.heightAnchor),
