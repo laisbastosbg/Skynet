@@ -10,10 +10,12 @@ import UIKit
 
 
 class PublishController: UIViewController {
-    lazy var textFieldPost: UITextField = {
-        let textFieldPost = UITextField(frame: CGRect())
+    let postViewModel = PostViewModel()
+    
+    lazy var textFieldPost: UITextView = {
+        let textFieldPost = UITextView(frame: CGRect())
         textFieldPost.backgroundColor = .white
-        textFieldPost.text = "Comente aqui!"
+//        textFieldPost.placeholder = "Comente aqui!"
         textFieldPost.translatesAutoresizingMaskIntoConstraints = false
         return textFieldPost
     }()
@@ -25,7 +27,7 @@ class PublishController: UIViewController {
         buttonSent.setTitle("Send", for: .normal)
         buttonSent.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         buttonSent.setTitleColor(.white, for: .normal)
-//        button.addTarget(self, action: #selector(login), for: .touchUpInside)
+        buttonSent.addTarget(self, action: #selector(publish), for: .touchUpInside)
         return buttonSent
     }()
 
@@ -33,7 +35,7 @@ class PublishController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+//        view.backgroundColor = .green
         self.title = "Publish"
         view.addSubview(textFieldPost)
         view.addSubview(buttonSent)
@@ -58,6 +60,23 @@ class PublishController: UIViewController {
         ])
     }
 
-
+    @objc func publish() {
+        let content = textFieldPost.text!
+        
+        Task {
+            guard let tokenData = KeychainHelper.standard.read(service: "access-token", account: "skynet") else {
+                print("nenhum token encontrado")
+                return
+            }
+            
+            let token = String(data: tokenData, encoding: .utf8)!
+            
+            let post = Post.create(content: content)
+            
+            let contentType = "text/plain"
+            
+            await postViewModel.addPost(post, contentType, token)
+        }
+    }
 
 }

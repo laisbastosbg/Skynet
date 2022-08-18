@@ -15,16 +15,20 @@ class LoginController: UIViewController {
     
     lazy var textFieldEmail: UITextField = {
         let textFieldEmail = UITextField(frame: CGRect())
+        textFieldEmail.borderStyle = .line
         textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "Email"
+        textFieldEmail.text = "monica@gmail.com"
+        textFieldEmail.placeholder = "Email"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
     }()
     
     lazy var textFieldPassword: UITextField = {
         let textFieldEmail = UITextField(frame: CGRect())
+        textFieldEmail.borderStyle = .line
         textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "Password"
+        textFieldEmail.text = "sansao"
+        textFieldEmail.placeholder = "Password"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
     }()
@@ -67,9 +71,9 @@ class LoginController: UIViewController {
         if let sheet = apresentationController.sheetPresentationController{
             sheet.detents = [.large()]
         }
-        self.present(apresentationController, animated: true)
+//        self.present(apresentationController, animated: true)
 
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         view.addSubview(textFieldEmail)
         view.addSubview(textFieldPassword)
         view.addSubview(buttonLogin)

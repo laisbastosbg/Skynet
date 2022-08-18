@@ -13,7 +13,7 @@ class MainController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = .white
         setUpView()
     }
     
@@ -105,9 +105,9 @@ class MainController: UITabBarController {
     }
     
     
-    @objc func getPosts(sender: UIButton) {
+    @objc func getPosts(sender: UIButton)  {
         Task {
-            await postViewModel.fetchPosts()
+            let posts = await postViewModel.fetchPosts()
         }
     }
     

@@ -8,9 +8,9 @@
 import Foundation
 
 class PostViewModel {
-    func fetchPosts() async {
+    func fetchPosts() async -> [Post] {
         let posts = await PostService.getPosts()
-        print(posts)
+        return posts
     }
     
     func addPost(_ post: Post.create, _ contentType: String, _ token: String) async {

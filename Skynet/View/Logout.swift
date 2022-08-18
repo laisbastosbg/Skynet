@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class Logout: UIViewController {
+    let userViewModel = UserViewModel()
+    
     lazy var buttonLogout: UIButton = {
         let buttonLogout = UIButton(type: .system)
         buttonLogout.backgroundColor = .systemCyan
@@ -16,7 +18,8 @@ class Logout: UIViewController {
         buttonLogout.setTitle("Logout", for: .normal)
         buttonLogout.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         buttonLogout.setTitleColor(.white, for: .normal)
-        //button.addTarget(self, action: #selector(login), for: .touchUpInside)
+        buttonLogout.addTarget(self, action: #selector(logout(sender:
+                                                             )), for: .touchUpInside)
         return buttonLogout
     }()
 
@@ -39,5 +42,19 @@ class Logout: UIViewController {
                                                  multiplier: 0.2),
             buttonLogout.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
+    }
+    
+    @objc func logout(sender: UIButton) {
+        Task {
+            guard let tokenData = KeychainHelper.standard.read(service: "access-token", account: "skynet") else {
+                print("nenhum token encontrado")
+                return
+            }
+            
+            let token = String(data: tokenData, encoding: .utf8)!
+            await userViewModel.logout(token: token)
+            
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
 }

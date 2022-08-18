@@ -9,33 +9,38 @@ import Foundation
 import UIKit
 
 class RegistrationController: UIViewController {
-    lazy var textFieldTittle: UITextView = {
-        let textFieldTittle = UITextView(frame: CGRect())
-        textFieldTittle.text = "SignIn"
+    let userViewModel = UserViewModel()
+    
+    lazy var textFieldTittle: UILabel = {
+        let textFieldTittle = UILabel(frame: CGRect())
+        textFieldTittle.text = "Cadastre-se"
         textFieldTittle.translatesAutoresizingMaskIntoConstraints = false
         return textFieldTittle
     }()
 
     lazy var textFieldName: UITextField = {
         let textFieldName = UITextField(frame: CGRect())
-        textFieldName.backgroundColor = .blue
-        textFieldName.text = "Name"
+        textFieldName.borderStyle = .line
+        textFieldName.backgroundColor = .white
+        textFieldName.placeholder = "Name"
         textFieldName.translatesAutoresizingMaskIntoConstraints = false
         return textFieldName
     }()
 
     lazy var textFieldEmail: UITextField = {
         let textFieldEmail = UITextField(frame: CGRect())
-        textFieldEmail.backgroundColor = .blue
-        textFieldEmail.text = "Email"
+        textFieldEmail.borderStyle = .line
+        textFieldEmail.backgroundColor = .white
+        textFieldEmail.placeholder = "Email"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
     }()
 
     lazy var textFieldPassword: UITextField = {
         let textFieldEmail = UITextField(frame: CGRect())
-        textFieldEmail.backgroundColor = .blue
-        textFieldEmail.text = "Password"
+        textFieldEmail.borderStyle = .line
+        textFieldEmail.backgroundColor = .white
+        textFieldEmail.placeholder = "Password"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
     }()
@@ -52,10 +57,10 @@ class RegistrationController: UIViewController {
         let buttonRegister = UIButton(type: .system)
         buttonRegister.backgroundColor = .blue
         buttonRegister.translatesAutoresizingMaskIntoConstraints = false
-        buttonRegister.setTitle("Login", for: .normal)
+        buttonRegister.setTitle("Criar conta", for: .normal)
         buttonRegister.titleLabel?.font = UIFont.systemFont(ofSize: 25)
         buttonRegister.setTitleColor(.white, for: .normal)
-//        buttonRegister.addTarget(self, action: #selector(login), for: .touchUpInside)
+        buttonRegister.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return buttonRegister
     }()
 
@@ -66,7 +71,7 @@ class RegistrationController: UIViewController {
         view.addSubview(textFieldName)
         view.addSubview(textFieldEmail)
         view.addSubview(textFieldPassword)
-        view.addSubview(textFieldConfirmPassword)
+//        view.addSubview(textFieldConfirmPassword)
         view.addSubview(buttonRegister)
         self.title = "Seach"
         setConstraints()
@@ -77,7 +82,7 @@ class RegistrationController: UIViewController {
         setConstraintTextFieldName()
         setConstraintTextFieldEmail()
         setConstraintTextFieldPassword()
-        setConstraintTextFieldConfirmPassword()
+//        setConstraintTextFieldConfirmPassword()
         setConstraintButtonRegister()
     }
 
@@ -131,8 +136,28 @@ class RegistrationController: UIViewController {
         NSLayoutConstraint.activate([
             buttonRegister.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             buttonRegister.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
-            buttonRegister.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            buttonRegister.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.075),
             buttonRegister.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
+    }
+    
+    @objc func signIn() {
+        let name = textFieldName.text!
+        let email = textFieldEmail.text!
+        let password = textFieldPassword.text!
+        
+        if(
+            email.count < 1 ||
+            name.count < 1 ||
+            password.count < 1
+        ) {
+            print("vazio")
+        } else {
+            let user = User(id: nil, name: name, email: email, password: password)
+            
+            Task {
+                await userViewModel.addUser(user: user)
+            }
+        }
     }
 }

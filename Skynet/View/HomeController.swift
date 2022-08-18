@@ -46,7 +46,7 @@ class CellPost: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemRed
+//        backgroundColor = .systemRed
         addSubview(labelName)
         addSubview(labelHours)
         addSubview(labelPost)
@@ -112,7 +112,9 @@ class CellPost: UICollectionViewCell {
 
 class HomeController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
-    var album: [String] = ["OI", "blz", "dsfsdf", "fsdfdsfds"]
+    var album: [Post] = []
+    
+    var postViewModel = PostViewModel()
     
     lazy var collectionViewPosts: UICollectionView = {
         let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -125,7 +127,7 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionViewPosts.dataSource = self
         collectionViewPosts.delegate = self
         collectionViewPosts.register(CellPost.self, forCellWithReuseIdentifier: "collectionViewPosts")
-        collectionViewPosts.backgroundColor = .red
+//        collectionViewPosts.backgroundColor = .red
         collectionViewPosts.translatesAutoresizingMaskIntoConstraints = false
         return collectionViewPosts
         
@@ -137,7 +139,7 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewPosts", for: indexPath) as! CellPost
-        cell.labelPost.text = album[indexPath.item]
+        cell.labelPost.text = album[indexPath.item].content
         //        let text = UITextView(frame: CGRect())
         //        text.text = album[indexPath.item]
         //        text.frame.size = cell.contentView.bounds.size
@@ -156,6 +158,10 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Task{
+            self.album = await postViewModel.fetchPosts()
+        }
+
     }
     
     func setUpConstraints(){
