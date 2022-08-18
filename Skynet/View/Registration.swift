@@ -43,7 +43,6 @@ class RegistrationController: UIViewController {
     lazy var textFieldConfirmPassword: UITextField = {
         let textFieldConfirmPassword = UITextField(frame: CGRect())
         textFieldConfirmPassword.backgroundColor = .blue
-
         textFieldConfirmPassword.text = "Confirm"
         textFieldConfirmPassword.translatesAutoresizingMaskIntoConstraints = false
         return textFieldConfirmPassword
@@ -69,43 +68,71 @@ class RegistrationController: UIViewController {
         view.addSubview(textFieldPassword)
         view.addSubview(textFieldConfirmPassword)
         view.addSubview(buttonRegister)
-
         self.title = "Seach"
+        setConstraints()
+    }
 
+    func setConstraints(){
+        setConstraintTextFieldTittle()
+        setConstraintTextFieldName()
+        setConstraintTextFieldEmail()
+        setConstraintTextFieldPassword()
+        setConstraintTextFieldConfirmPassword()
+        setConstraintButtonRegister()
+    }
+
+    func setConstraintTextFieldTittle(){
         NSLayoutConstraint.activate([
             textFieldTittle.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldTittle.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200),
             textFieldTittle.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             textFieldTittle.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintTextFieldName(){
+        NSLayoutConstraint.activate([
             textFieldName.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldName.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
             textFieldName.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             textFieldName.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
 
+        ])
+    }
+    
+    func setConstraintTextFieldEmail(){
+        NSLayoutConstraint.activate([
             textFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -130),
             textFieldEmail.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             textFieldEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintTextFieldPassword(){
+        NSLayoutConstraint.activate([
             textFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             textFieldPassword.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             textFieldPassword.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintTextFieldConfirmPassword(){
+        NSLayoutConstraint.activate([
             textFieldConfirmPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             textFieldConfirmPassword.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
             textFieldConfirmPassword.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             textFieldConfirmPassword.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+        ])
+    }
 
+    func setConstraintButtonRegister(){
+        NSLayoutConstraint.activate([
             buttonRegister.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
             buttonRegister.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
             buttonRegister.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
             buttonRegister.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         ])
-
     }
-
-
-
 }
