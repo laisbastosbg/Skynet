@@ -14,13 +14,14 @@ class UserViewModel {
         }
     }
     
-    func fetchUserByID(id: String) async {
+    func fetchUserByID(id: String) async -> User? {
         do {
             let user = try await UserService.getUserByID(id: id)
-            print(user)
+            return user
         } catch {
             print("Erro: \(error)")
         }
+        return nil
     }
     
     func addUser(user: User) async {

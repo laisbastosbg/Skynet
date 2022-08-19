@@ -76,6 +76,8 @@ class PublishController: UIViewController {
             let contentType = "text/plain"
             
             await postViewModel.addPost(post, contentType, token)
+            self.tabBarController?.selectedIndex = 0
+
         }
     }
 

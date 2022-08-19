@@ -24,7 +24,6 @@ class UserService: API {
         guard let url = URL(string: "\(baseURL)/users/\(id)") else { fatalError("missing url") }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        print(data)
         let user = try JSONDecoder().decode(User.self, from: data)
         
         return user

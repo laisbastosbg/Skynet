@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 class CellPost: UICollectionViewCell {
+    lazy var view: UIView = {
+        let view = UILabel(frame: CGRect())
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     lazy var labelName: UILabel = {
         let labelName = UILabel(frame: CGRect())
         labelName.text = "@Laís"
@@ -46,21 +52,22 @@ class CellPost: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .systemRed
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = 7
+        self.layer.borderColor = UIColor(red:255, green:255, blue:255, alpha: 1).cgColor
         addSubview(labelName)
         addSubview(labelHours)
         addSubview(labelPost)
-        
         setConstraints()
     }
     
     func setConstraints(){
-        setConstraintLabelName()
-        setConstraintLabelHours()
-        setConstraintLabelPost()
+        setConstraintsLabelName()
+        setConstraintsLabelHours()
+        setConstraintsLabelPost()
     }
-    
-    func setConstraintLabelName(){
+
+    func setConstraintsLabelName(){
         NSLayoutConstraint.activate(
             [
                 labelName.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -self.frame.width/2.5),
@@ -72,7 +79,7 @@ class CellPost: UICollectionViewCell {
         )
     }
     
-    func setConstraintLabelHours(){
+    func setConstraintsLabelHours(){
         NSLayoutConstraint.activate(
             [
                 labelHours.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: self.frame.width/2.5),
@@ -84,26 +91,18 @@ class CellPost: UICollectionViewCell {
         )
     }
     
-    func setConstraintLabelPost(){
+    func setConstraintsLabelPost(){
         NSLayoutConstraint.activate(
             [
                 labelPost.centerXAnchor.constraint(equalTo: self.centerXAnchor),
                 labelPost.centerYAnchor.constraint(equalTo: self.centerYAnchor),
                 labelPost.heightAnchor.constraint(equalTo: self.heightAnchor,
                                                   multiplier: 0.8),
-                labelPost.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5),
+                labelPost.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             ]
         )
     }
-    
-    func setConstraint(){
-        NSLayoutConstraint.activate(
-            [
-                
-            ]
-        )
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -111,9 +110,11 @@ class CellPost: UICollectionViewCell {
 }
 
 class HomeController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
-    
-    var album: [Post] = []
-    
+
+    var posts: [Post] = []
+    var namesUsers: [String?] = []
+
+    var userViewModel = UserViewModel()
     var postViewModel = PostViewModel()
     
     lazy var collectionViewPosts: UICollectionView = {
@@ -134,17 +135,14 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return album.count
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewPosts", for: indexPath) as! CellPost
-        cell.labelPost.text = album[indexPath.item].content
-        //        let text = UITextView(frame: CGRect())
-        //        text.text = album[indexPath.item]
-        //        text.frame.size = cell.contentView.bounds.size
-        //
-        //
+        cell.labelPost.text = posts[indexPath.item].content
+        cell.labelName.text = namesUsers[indexPath.item]
+        cell.labelHours.text = posts[indexPath.item].created_at
         return cell
     }
     
@@ -152,16 +150,25 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         view.backgroundColor = .blue
         self.title = "Home"
-        view.addSubview(collectionViewPosts)
-        self.setUpConstraints()
     }
-    
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task{
-            self.album = await postViewModel.fetchPosts()
-        }
+            posts = await postViewModel.fetchPosts()
 
+            for i in posts {
+                if let user = await userViewModel.fetchUserByID(id: i.user_id) {
+                    namesUsers.append("@" + user.name)
+                } else {
+                    namesUsers.append(nil)
+                }
+            }
+            collectionViewPosts.reloadData()
+            view.addSubview(collectionViewPosts)
+            self.setUpConstraints()
+        }
     }
     
     func setUpConstraints(){

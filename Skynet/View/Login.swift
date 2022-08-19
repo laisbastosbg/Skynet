@@ -17,7 +17,7 @@ class LoginController: UIViewController {
         let textFieldEmail = UITextField(frame: CGRect())
         textFieldEmail.borderStyle = .line
         textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "monica@gmail.com"
+        textFieldEmail.text = "m.mirazev@gmail.com"
         textFieldEmail.placeholder = "Email"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
@@ -27,7 +27,7 @@ class LoginController: UIViewController {
         let textFieldEmail = UITextField(frame: CGRect())
         textFieldEmail.borderStyle = .line
         textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "sansao"
+        textFieldEmail.text = "senha123"
         textFieldEmail.placeholder = "Password"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
@@ -67,6 +67,7 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let apresentationController = Apresentation()
         if let sheet = apresentationController.sheetPresentationController{
             sheet.detents = [.large()]
