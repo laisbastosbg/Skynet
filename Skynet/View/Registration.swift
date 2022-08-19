@@ -158,6 +158,9 @@ class RegistrationController: UIViewController {
             Task {
                 await userViewModel.addUser(user: user)
             }
+
         }
+        self.dismiss(animated: true)
+
     }
 }

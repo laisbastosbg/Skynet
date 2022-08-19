@@ -82,6 +82,16 @@ class LoginController: UIViewController {
         setConstraints()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.backgroundColor = .white
+        view.addSubview(textFieldEmail)
+        view.addSubview(textFieldPassword)
+        view.addSubview(buttonLogin)
+        view.addSubview(buttonRegistration)
+        setConstraints()
+    }
+    
     func setConstraints(){
         setConstraintsTextFieldEmail()
         setConstraintsTextFieldPassword()

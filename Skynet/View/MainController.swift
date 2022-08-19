@@ -13,6 +13,8 @@ class MainController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.navigationItem.setHidesBackButton(true, animated:false)
+
         view.backgroundColor = .white
         setUpView()
     }

@@ -146,8 +146,8 @@
 				95FD489428ABFB5F00F313F4 /* Registration.swift */,
 				954A194428A29FFE004C97D9 /* MainController.swift */,
 				95FD489028ABF8FB00F313F4 /* HomeController.swift */,
-				95FD488C28ABF8BB00F313F4 /* PublishController.swift */,
 				95FD488828ABF80800F313F4 /* UserController.swift */,
+				95FD488C28ABF8BB00F313F4 /* PublishController.swift */,
 				9532F57B28AE64CF006FB215 /* Logout.swift */,
 			);
 			path = View;

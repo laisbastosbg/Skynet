@@ -54,7 +54,6 @@ class Logout: UIViewController {
             let token = String(data: tokenData, encoding: .utf8)!
             await userViewModel.logout(token: token)
             
-            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 }

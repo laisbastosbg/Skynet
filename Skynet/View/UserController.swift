@@ -11,7 +11,13 @@ import UIKit
 
 
 class UserController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var album = ["Oi", "dfsfd", "34234", "324234", "dslfnsd", "Oi", "dfsfd", "34234", "324234", "dslfnsd"]
+
+    var posts: [Post] = []
+    var myPosts: [Post] = []
+    var namesUsers: [String?] = []
+
+    var userViewModel = UserViewModel()
+    var postViewModel = PostViewModel()
 
     lazy var imageUser: UIView = {
         let image = UIImage(systemName: "person")
@@ -70,16 +76,35 @@ class UserController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Task{
+            posts = await postViewModel.fetchPosts()
+
+            for i in posts {
+                if let user = await userViewModel.fetchUserByID(id: i.user_id) {
+                    
+
+
+
+                    namesUsers.append("@" + user.name)
+                } else {
+                    namesUsers.append(nil)
+                }
+            }
+            collectionViewPosts.reloadData()
+            view.addSubview(collectionViewPosts)
+            self.setUpConstraints()
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return album.count
+        return posts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewPosts", for: indexPath) as! CellPost
-        cell.labelPost.text = album[indexPath.item]
-        //        let text = UITextView(frame: CGRect())
+        cell.labelPost.text = posts[indexPath.item].content
+        cell.labelName.text = namesUsers[indexPath.item]
+        cell.labelHours.text = posts[indexPath.item].created_at        //        let text = UITextView(frame: CGRect())
         //        text.text = album[indexPath.item]
         //        text.frame.size = cell.contentView.bounds.size
         //
