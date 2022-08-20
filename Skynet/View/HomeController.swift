@@ -128,7 +128,6 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionViewPosts.dataSource = self
         collectionViewPosts.delegate = self
         collectionViewPosts.register(CellPost.self, forCellWithReuseIdentifier: "collectionViewPosts")
-//        collectionViewPosts.backgroundColor = .red
         collectionViewPosts.translatesAutoresizingMaskIntoConstraints = false
         return collectionViewPosts
         
@@ -156,25 +155,33 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Task{
-            posts = await postViewModel.fetchPosts()
-
-            for i in posts {
-                if let user = await userViewModel.fetchUserByID(id: i.user_id) {
-                    namesUsers.append("@" + user.name)
-                } else {
-                    namesUsers.append(nil)
-                }
-            }
+            await getPosts()
+            await getNamesUsers()
             collectionViewPosts.reloadData()
             view.addSubview(collectionViewPosts)
             self.setUpConstraints()
         }
+
     }
-    
+
+    func getPosts() async {
+        posts = await postViewModel.fetchPosts()
+    }
+
+    func getNamesUsers() async {
+        for i in posts {
+            if let user = await userViewModel.fetchUserByID(id: i.user_id) {
+                namesUsers.append("@" + user.name)
+            } else {
+                namesUsers.append(nil)
+            }
+        }
+    }
+
     func setUpConstraints(){
         setUpConstraintsCollectionViewPosts()
     }
-    
+
     func setUpConstraintsCollectionViewPosts(){
         NSLayoutConstraint.activate([
             collectionViewPosts.widthAnchor.constraint(equalTo: self.view.widthAnchor),
@@ -184,3 +191,5 @@ class HomeController: UIViewController, UICollectionViewDelegate, UICollectionVi
         ])
     }
 }
+
+
