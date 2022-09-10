@@ -8,26 +8,15 @@
 import Foundation
 import UIKit
 
-
 class LoginController: UIViewController {
     let userViewModel = UserViewModel()
     var loginError = false
     
-    lazy var textFieldEmail: UITextField = {
-        let textFieldEmail = UITextField(frame: CGRect())
-        textFieldEmail.borderStyle = .line
-        textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "m.mirazev@gmail.com"
-        textFieldEmail.placeholder = "Email"
-        textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        return textFieldEmail
-    }()
+    
     
     lazy var textFieldPassword: UITextField = {
         let textFieldEmail = UITextField(frame: CGRect())
         textFieldEmail.borderStyle = .line
-        textFieldEmail.backgroundColor = .white
-        textFieldEmail.text = "senha123"
         textFieldEmail.placeholder = "Password"
         textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
         return textFieldEmail
@@ -75,7 +64,7 @@ class LoginController: UIViewController {
 //        self.present(apresentationController, animated: true)
 
         view.backgroundColor = .white
-        view.addSubview(textFieldEmail)
+//        view.addSubview(TextFieldEmail)
         view.addSubview(textFieldPassword)
         view.addSubview(buttonLogin)
         view.addSubview(buttonRegistration)
@@ -85,7 +74,7 @@ class LoginController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .white
-        view.addSubview(textFieldEmail)
+//        view.addSubview(TextFieldEmail)
         view.addSubview(textFieldPassword)
         view.addSubview(buttonLogin)
         view.addSubview(buttonRegistration)
@@ -93,21 +82,21 @@ class LoginController: UIViewController {
     }
     
     func setConstraints(){
-        setConstraintsTextFieldEmail()
+//        setConstraintsTextFieldEmail()
         setConstraintsTextFieldPassword()
         setConstraintsButtonLogin()
         setConstraintsButtonRegistration()
     }
 
-    func setConstraintsTextFieldEmail() {
-        NSLayoutConstraint.activate([
-            textFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            textFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
-            textFieldEmail.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                   multiplier: 0.05),
-            textFieldEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-        ])
-    }
+//    func setConstraintsTextFieldEmail() {
+//        NSLayoutConstraint.activate([
+//            TextFieldEmail.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+//            TextFieldEmail.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -160),
+//            TextFieldEmail.heightAnchor.constraint(equalTo: view.heightAnchor,
+//                                                   multiplier: 0.05),
+//            TextFieldEmail.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+//        ])
+//    }
 
     func setConstraintsTextFieldPassword() {
         NSLayoutConstraint.activate([
@@ -150,21 +139,21 @@ class LoginController: UIViewController {
     }
     
     @objc func login() {
-        let email = textFieldEmail.text!
-        let password = textFieldPassword.text!
-        let user = User.authentication(username: email, password: password)
-        
-        Task {
-            let loginStatus = await userViewModel.login(user: user)
-            
-            if (loginStatus == 200) {
-                let mainController = MainController()
-                self.navigationController?.pushViewController(mainController, animated: false)
-            } else {
-                loginError = true
-                print("usuario ou senha incorretos")
-            }
-        }
+//        let email = textFieldEmail.text!
+//        let password = textFieldPassword.text!
+//        let user = User.authentication(username: email, password: password)
+//        
+//        Task {
+//            let loginStatus = await userViewModel.login(user: user)
+//            
+//            if (loginStatus == 200) {
+//                let mainController = MainController()
+//                self.navigationController?.pushViewController(mainController, animated: false)
+//            } else {
+//                loginError = true
+//                print("usuario ou senha incorretos")
+//            }
+//        }
         
         
         
