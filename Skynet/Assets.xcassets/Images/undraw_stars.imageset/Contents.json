@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "undraw_stars_re_6je7.svg",
+      "filename" : "undraw_stars.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,8 +17,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }

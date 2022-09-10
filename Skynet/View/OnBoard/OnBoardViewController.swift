@@ -21,69 +21,94 @@ class OnBoardViewController: UIViewController {
     }()
     
     lazy var imageView: UIImageView = {
-        let image = UIImage(named: "undraw_stars")!
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame.size.width = 100
-        imageView.frame.size.height = 100
-        
-        return imageView
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "undraw_stars")
+        return image
     }()
     
     
     lazy var signInWithEmailButton: UIButton = {
         let button = UIButton(type: .custom)
-        
-        button.backgroundColor = UIColor(named: "CallToAction")
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign in with email", for: .normal)
+        button.configuration = .filled()
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
-        
-        let icon = UIImage(systemName: "envelope.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal
-        )
+        let icon = UIImage(systemName: "envelope.fill")
         button.setImage(icon, for: .normal)
-        //        button.imageView?.image = UIImage(systemName: "envelope")
         button.addTarget(self, action: #selector(login), for: .touchUpInside)
-        
         return button
     }()
     
-    lazy var recoverPasswordButton: UIButton = {
-       let button
+    lazy var signUpLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Don't have an account yet?"
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        return label
     }()
     
+    lazy var signUpButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sign up", for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.addTarget(self, action: #selector(openRegistrationSheet), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //        title.textAlignment = .justified
+
         view.addSubview(titleLabel)
                 view.addSubview(imageView)
         view.addSubview(signInWithEmailButton)
+//        view.addSubview(signUpView)
+        view.addSubview(signUpLabel)
+        view.addSubview(signUpButton)
         view.backgroundColor = UIColor(named: "Primary")
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            titleLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
             
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint(equalToConstant: 200),
-//                        imageView.widthAnchor.constraint(equalTo: view.widthAnchor, constant),
-//                        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, constant)
+            imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 48),
+            imageView.heightAnchor.constraint(equalToConstant: 244),
+            imageView.widthAnchor.constraint(equalToConstant: 330),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            signInWithEmailButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            signInWithEmailButton.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 200),
-            signInWithEmailButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            signInWithEmailButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05),
+            signInWithEmailButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signInWithEmailButton.heightAnchor.constraint(equalToConstant: 48),
+            signInWithEmailButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 96),
+            signInWithEmailButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 64),
+            signInWithEmailButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -64),
+            
+//            signUpView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            signUpView.topAnchor.constraint(equalTo: signInWithEmailButton.bottomAnchor, constant: 8),
+//            signUpView.leadingAnchor.constraint(equalTo: signInWithEmailButton.leadingAnchor),
+//            signUpView.trailingAnchor.constraint(equalTo: signInWithEmailButton.trailingAnchor),
+            
+            signUpLabel.leadingAnchor.constraint(equalTo: signInWithEmailButton.leadingAnchor),
+            signUpLabel.topAnchor.constraint(equalTo: signInWithEmailButton.bottomAnchor, constant: 8),
+            
+            signUpButton.leadingAnchor.constraint(equalTo: signUpLabel.trailingAnchor, constant: 4),
+            signUpButton.centerYAnchor.constraint(equalTo: signUpLabel.centerYAnchor),
             
         ])
     }
     
     @objc func login() {
+        let nextPage = LoginController()
+        self.navigationController?.pushViewController(nextPage, animated: true)
+    }
+    
+    @objc func openRegistrationSheet() {
+        let registrationController = RegistrationController()
         
+        if let sheet = registrationController.sheetPresentationController {
+            sheet.detents = [.large()]
+        }
+        self.present(registrationController, animated: true)
     }
 }
