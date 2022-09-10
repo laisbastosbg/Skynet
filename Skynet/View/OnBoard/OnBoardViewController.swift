@@ -63,7 +63,6 @@ class OnBoardViewController: UIViewController {
         view.addSubview(titleLabel)
                 view.addSubview(imageView)
         view.addSubview(signInWithEmailButton)
-//        view.addSubview(signUpView)
         view.addSubview(signUpLabel)
         view.addSubview(signUpButton)
         view.backgroundColor = UIColor(named: "Primary")
@@ -84,11 +83,6 @@ class OnBoardViewController: UIViewController {
             signInWithEmailButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 64),
             signInWithEmailButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -64),
             
-//            signUpView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            signUpView.topAnchor.constraint(equalTo: signInWithEmailButton.bottomAnchor, constant: 8),
-//            signUpView.leadingAnchor.constraint(equalTo: signInWithEmailButton.leadingAnchor),
-//            signUpView.trailingAnchor.constraint(equalTo: signInWithEmailButton.trailingAnchor),
-            
             signUpLabel.leadingAnchor.constraint(equalTo: signInWithEmailButton.leadingAnchor),
             signUpLabel.topAnchor.constraint(equalTo: signInWithEmailButton.bottomAnchor, constant: 8),
             
@@ -108,6 +102,7 @@ class OnBoardViewController: UIViewController {
         
         if let sheet = registrationController.sheetPresentationController {
             sheet.detents = [.large()]
+            sheet.prefersGrabberVisible = true
         }
         self.present(registrationController, animated: true)
     }
