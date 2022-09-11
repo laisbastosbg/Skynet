@@ -12,42 +12,45 @@ class RegistrationController: UIViewController {
     let userViewModel = UserViewModel()
     
     lazy var textFieldTitle: UILabel = {
-        let textFieldTitle = UILabel(frame: CGRect())
+        let textFieldTitle = UILabel()
         textFieldTitle.text = "Sign Up"
         textFieldTitle.font = UIFont.preferredFont(forTextStyle: .title3)
         textFieldTitle.translatesAutoresizingMaskIntoConstraints = false
         return textFieldTitle
     }()
-
+    
     lazy var textFieldName: UITextField = {
-        let textFieldName = UITextField(frame: CGRect())
-        textFieldName.borderStyle = .roundedRect
-        textFieldName.placeholder = "Name"
-        textFieldName.autocorrectionType = .no
-        textFieldName.translatesAutoresizingMaskIntoConstraints = false
-        return textFieldName
+        let textField = UITextField(frame: CGRect())
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Name"
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
-
+    
     lazy var textFieldEmail: UITextField = {
-        let textFieldEmail = UITextField(frame: CGRect())
-        textFieldEmail.borderStyle = .roundedRect
-        textFieldEmail.placeholder = "Email"
-        textFieldEmail.autocorrectionType = .no
-        textFieldEmail.keyboardType = .emailAddress
-        textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        return textFieldEmail
+        let textField = UITextField(frame: CGRect())
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Email"
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.keyboardType = .emailAddress
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
-
+    
     lazy var textFieldPassword: UITextField = {
-        let textFieldEmail = UITextField(frame: CGRect())
-        textFieldEmail.borderStyle = .roundedRect
-        textFieldEmail.placeholder = "Password"
-        textFieldEmail.isSecureTextEntry = true
-        textFieldEmail.autocorrectionType = .no
-        textFieldEmail.translatesAutoresizingMaskIntoConstraints = false
-        return textFieldEmail
+        let textField = UITextField(frame: CGRect())
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
-
+    
     lazy var buttonRegister: UIButton = {
         let buttonRegister = UIButton(type: .system)
         buttonRegister.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +105,7 @@ class RegistrationController: UIViewController {
         buttonRegister.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         return buttonRegister
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Primary")
@@ -119,13 +122,13 @@ class RegistrationController: UIViewController {
         self.title = "Seach"
         setConstraints()
     }
-
+    
     func setConstraints(){
         setConstraintTextFieldTitle()
         setConstraintTextFieldName()
         setConstraintTextFieldEmail()
         setConstraintTextFieldPassword()
-//        setConstraintTextFieldConfirmPassword()
+        //        setConstraintTextFieldConfirmPassword()
         setConstraintButtonRegister()
         setConstraintLeftDivider()
         setAlternativeSignUpLabel()
@@ -176,14 +179,14 @@ class RegistrationController: UIViewController {
             rightDivider.leadingAnchor.constraint(equalTo: alternativeSignUpLabel.trailingAnchor, constant: 8)
         ])
     }
-
+    
     func setConstraintTextFieldTitle(){
         NSLayoutConstraint.activate([
             textFieldTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textFieldTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
         ])
     }
-
+    
     func setConstraintTextFieldName(){
         NSLayoutConstraint.activate([
             textFieldName.topAnchor.constraint(equalTo: textFieldTitle.bottomAnchor, constant: 64),
@@ -201,7 +204,7 @@ class RegistrationController: UIViewController {
             textFieldEmail.heightAnchor.constraint(equalTo: textFieldName.heightAnchor)
         ])
     }
-
+    
     func setConstraintTextFieldPassword(){
         NSLayoutConstraint.activate([
             textFieldPassword.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 16),
@@ -210,7 +213,7 @@ class RegistrationController: UIViewController {
             textFieldPassword.heightAnchor.constraint(equalTo: textFieldName.heightAnchor)
         ])
     }
-
+    
     func setConstraintButtonRegister(){
         NSLayoutConstraint.activate([
             buttonRegister.heightAnchor.constraint(equalToConstant: 48),
@@ -233,13 +236,25 @@ class RegistrationController: UIViewController {
             print("vazio")
         } else {
             let user = User(id: nil, name: name, email: email, password: password)
+            let authUser = User.authentication(username: email, password: password)
             
             Task {
                 await userViewModel.addUser(user: user)
+                
+                let loginStatus = await userViewModel.login(user: authUser)
+                
+                if (loginStatus == 200) {
+                    let mainController = MainController()
+                    self.navigationController?.pushViewController(mainController, animated: false)
+                } else {
+                    //                    loginError = true
+                    print("usuario ou senha incorretos")
+                }
             }
-
         }
+        
+        
         self.dismiss(animated: true)
-
+        
     }
 }
