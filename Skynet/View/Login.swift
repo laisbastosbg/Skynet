@@ -52,51 +52,6 @@ class LoginController: UIViewController {
         return button
     }()
     
-    lazy var leftDivider: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var rightDivider: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    lazy var alternativeSignUpLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "or"
-        label.textColor = .gray
-        label.font = .preferredFont(forTextStyle: .body)
-        return label
-    }()
-    
-    lazy var signUpWithApple: UIButton = {
-        let buttonRegister = UIButton(type: .system)
-        buttonRegister.translatesAutoresizingMaskIntoConstraints = false
-        buttonRegister.tintColor = .black
-        buttonRegister.setTitle("Log in with Apple", for: .normal)
-        buttonRegister.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        buttonRegister.configuration = .filled()
-        buttonRegister.addTarget(self, action: #selector(login), for: .touchUpInside)
-        return buttonRegister
-    }()
-    
-    lazy var signUpWithGoogle: UIButton = {
-        let buttonRegister = UIButton(type: .system)
-        buttonRegister.translatesAutoresizingMaskIntoConstraints = false
-        buttonRegister.tintColor = .black
-        buttonRegister.setTitle("Log in with Google", for: .normal)
-        buttonRegister.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-        buttonRegister.configuration = .bordered()
-        buttonRegister.addTarget(self, action: #selector(login), for: .touchUpInside)
-        return buttonRegister
-    }()
-    
     lazy var loginErrorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -114,11 +69,6 @@ class LoginController: UIViewController {
         view.addSubview(textFieldEmail)
         view.addSubview(textFieldPassword)
         view.addSubview(buttonLogin)
-        view.addSubview(leftDivider)
-        view.addSubview(alternativeSignUpLabel)
-        view.addSubview(rightDivider)
-        view.addSubview(signUpWithApple)
-        view.addSubview(signUpWithGoogle)
         setConstraints()
     }
     
@@ -127,54 +77,6 @@ class LoginController: UIViewController {
         self.setConstraintsTextFieldEmail()
         self.setConstraintsTextFieldPassword()
         self.setConstraintsButtonLogin()
-        self.setConstraintLeftDivider()
-        self.setAlternativeSignUpLabel()
-        self.setConstraintRightDivider()
-        self.setConstraintSignUpWithApple()
-        self.setConstraintSignUpWithGoogle()
-    }
-    
-    func setConstraintSignUpWithGoogle() {
-        NSLayoutConstraint.activate([
-            signUpWithGoogle.topAnchor.constraint(equalTo: signUpWithApple.bottomAnchor, constant: 32),
-            signUpWithGoogle.leadingAnchor.constraint(equalTo: buttonLogin.leadingAnchor),
-            signUpWithGoogle.trailingAnchor.constraint(equalTo: buttonLogin.trailingAnchor),
-            signUpWithGoogle.heightAnchor.constraint(equalToConstant: 48)
-        ])
-    }
-    
-    func setConstraintSignUpWithApple() {
-        NSLayoutConstraint.activate([
-            signUpWithApple.topAnchor.constraint(equalTo: alternativeSignUpLabel.bottomAnchor, constant: 32),
-            signUpWithApple.leadingAnchor.constraint(equalTo: buttonLogin.leadingAnchor),
-            signUpWithApple.trailingAnchor.constraint(equalTo: buttonLogin.trailingAnchor),
-            signUpWithApple.heightAnchor.constraint(equalToConstant: 48)
-        ])
-    }
-    
-    func setConstraintLeftDivider() {
-        NSLayoutConstraint.activate([
-            leftDivider.heightAnchor.constraint(equalToConstant: 0.5),
-            leftDivider.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 32),
-            leftDivider.leadingAnchor.constraint(equalTo: buttonLogin.leadingAnchor),
-            leftDivider.trailingAnchor.constraint(equalTo: alternativeSignUpLabel.leadingAnchor, constant: -8)
-        ])
-    }
-    
-    func setAlternativeSignUpLabel() {
-        NSLayoutConstraint.activate([
-            alternativeSignUpLabel.centerYAnchor.constraint(equalTo: leftDivider.centerYAnchor),
-            alternativeSignUpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-    }
-    
-    func setConstraintRightDivider() {
-        NSLayoutConstraint.activate([
-            rightDivider.heightAnchor.constraint(equalTo: leftDivider.heightAnchor),
-            rightDivider.topAnchor.constraint(equalTo: leftDivider.topAnchor),
-            rightDivider.trailingAnchor.constraint(equalTo: buttonLogin.trailingAnchor),
-            rightDivider.leadingAnchor.constraint(equalTo: alternativeSignUpLabel.trailingAnchor, constant: 8)
-        ])
     }
     
     func setConstraintsPageTitle() {
